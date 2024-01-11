@@ -1,34 +1,31 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   rot_13.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 14:54:15 by iniska            #+#    #+#             */
-/*   Updated: 2024/01/04 15:08:48 by iniska           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <unistd.h>
 
-void	rot_13(char	c)
+void	rot(char c)
 {
-	if (!c)
-		return ;
 	if ((c >= 'a' && c <= 'm') || (c >= 'A' && c <= 'M'))
+	{
 		c += 13;
-	else if ((c >= 'n' && c <= 'z') || (c <= 'N' && c >= 'Z'))
+		write(1, &c, 1);
+		return ;
+	}
+	else if ((c >= 'n' && c <= 'z') || (c >= 'N' && c <= 'Z'))
+	{
 		c -= 13;
-	write (1, &c, 1);
+		write(1, &c, 1);
+		return ;
+	}
+	else
+		write(1, &c, 1);
 }
 
-int main( int argc, char **argv)
+int	main(int ac, char **av)
 {
-	if (argc == 2)
+	if (ac == 2)
 	{
-		while (*argv[1])
-			rot_13(*argv[1]++);
+		while(*av[1])
+			rot(*av[1]++);
 	}
-	write (1, "\n", 1);
+	write(1, "\n", 1);
+	return (0);
 }
+
