@@ -5,38 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 11:04:45 by iniska            #+#    #+#             */
-/*   Updated: 2024/01/04 11:14:32 by iniska           ###   ########.fr       */
+/*   Created: 2024/01/29 11:27:44 by iniska            #+#    #+#             */
+/*   Updated: 2024/01/29 11:30:22 by iniska           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include <unistd.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_first_word(char *txt)
+void	firstw(char *av)
 {
 	int	i;
-	
-	if (!txt)
-		return ;
+
 	i = 0;
-	while (txt[i] != ' ' && txt[i] != '\0')
+	while (av[i] == ' ' || av[i] == '\t')
+		i++;
+	while (av[i] != ' ' && av[i] != '\t' && av[i] != '\0')
 	{
-		ft_putchar(txt[i]);
+		write(1, &av[i], 1);
 		i++;
 	}
-	ft_putchar('\n');
 }
 
-int main()
+int main(int ac, char **av)
 {
-	char *txt;
+	if (ac == 2)
+		firstw(av[1]);
+	write(1, "\n", 1);
+	return (0);
+}		
 
-	txt = "kuolematon kala on elossa";
-	ft_first_word(txt);
-	return(0);
-}
