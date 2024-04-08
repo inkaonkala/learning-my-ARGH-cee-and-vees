@@ -1,36 +1,25 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   sort_list.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: iniska <iniska@student.hive.fi>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/29 10:46:58 by iniska            #+#    #+#             */
-/*   Updated: 2024/01/29 11:01:31 by iniska           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdlib.h>
 #include "list.h"
+#include <unistd.h>
 
-t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
+t_list	*sort_list(t_list* lst, int(*cmp)(int, int))
 {
-	int		move;
-	t_list	*tmp;
+	int	i;
+	t_list	*temp;
 
-	tmp = lst;
-	while(lst->next != NULL)
+	temp = lst;
+	while (lst->next != NULL)
 	{
-		if(((*cmp)(lst->data, lst->next->data)) == 0)
+		if (((*cmp)(lst->data, lst->next->data)) == 0)
 		{
-			move = lst->data;
+			i = lst->data;
 			lst->data = lst->next->data;
-			lst->next->data = move;
-			lst = tmp;
-		}
+			lst->next->data = i;
+			lst = temp;
+		}	
 		else
 			lst = lst->next;
 	}
-	lst = tmp;
+	lst = temp;
 	return (lst);
 }
+
