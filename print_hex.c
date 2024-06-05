@@ -1,42 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_hex.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iniska <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/05 17:41:47 by iniska            #+#    #+#             */
+/*   Updated: 2024/06/05 17:46:20 by iniska           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <unistd.h>
 
-void	printhex(int n)
+void    printhex(int i)
 {
-	char *hex;
-	
-    hex = "0123456789abcdef";
-    if (n >= 16)
-        printhex(n / 16);
-    write(1, &hex[n % 16], 1);
+    char str[16] = "0123456789abcdef";
+    if (i >= 16)
+        printhex(i / 16);
+    write(1, &str[i % 16], 1);
 }
 
-int	changes(char *str)
+int    nmb(const char *arv)
 {
-	int	n;
-
-	n = 0;
-    /*
-	while (*str == ' ' || *str == '\n' || *str == '\t' || *str == '\v'
-		   || *str == '\f' || *str == '\r' || *str == '+')
-		str++;
-    if (*str == '\0' || *str == '-')
-        return (-1);
-	while((*str >= '0' && *str <= '9'))
-     */
-    while (*str != '\0')
-	{
-		n *= 10;
-		n += *str - '0';
-		str++;
-	}
-	return(n);
+    int result;
+    
+    result = 0;
+    while (*arv >= '0' && *arv <= '9')
+    {
+        result = result * 10 + (*arv - '0');
+        arv++;
+    }
+    return (result);
 }
 
-int main(int ac, char **av)
+int main(int arc, char **arv)
 {
-	if (ac == 2)
-		printhex(changes(av[1]));
-	write(1, "\n", 1);
-	return (0);
+    if (arc == 2)
+        printhex(nmb(arv[1]));
+    write(1, "\n", 1);
+    return (0);
 }
